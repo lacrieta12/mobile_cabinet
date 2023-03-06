@@ -12,9 +12,9 @@ app.secret_key = 'your secret key'
 
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'geekprofile'
+app.config['MYSQL_USER'] = 'admin'
+app.config['MYSQL_PASSWORD'] = 'admin'
+app.config['MYSQL_DB'] = 'auto_mobile_cabinet_server'
 
 
 mysql = MySQL(app)
@@ -92,6 +92,34 @@ def display():
 		cursor.execute('SELECT * FROM accounts WHERE id = % s', (session['id'], ))
 		account = cursor.fetchone()
 		return render_template("display.html", account = account)
+	return redirect(url_for('login'))
+
+@app.route("/store", methods =['GET', 'POST'])
+def store():
+	msg = ''
+	if 'loggedin' in session:
+		if request.method == 'POST' and 'id_transaksi' in request.form and 'id_dokumen' in request.form and 'status_dev1' in request.form and 'status_dev2' in request.form and 'status_dev3' in request.form:
+			id_transaksi = request.form['id_transaksi']
+			id_dokumen = request.form['id_dokumen']
+			status_dev1 = request.form['status_dev1']
+			status_dev2 = request.form['status_dev2']
+			status_dev3 = request.form['status_dev3']
+			cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+			cursor.execute('INSERT INTO data_trans SET id_transaksi =% s, id_dokumen =% s, status_dev1 =% s, status_dev2 =% s, status_dev3 =% s', (id_transaksi, id_dokumen, status_dev1, status_dev2, status_dev3))
+			mysql.connection.commit()
+			msg = 'You have successfully updated !'
+		elif request.method == 'POST':
+			msg = 'Please fill out the form !'
+		return render_template("store.html", msg = msg)
+	return redirect(url_for('login'))
+
+@app.route("/retrieve")
+def retrieve():
+	if 'loggedin' in session:
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		cursor.execute('SELECT * FROM list_dokumen')
+		dokumen = cursor.fetchall()
+		return render_template("retrieve.html", dokumen = dokumen)
 	return redirect(url_for('login'))
 
 @app.route("/update", methods =['GET', 'POST'])
