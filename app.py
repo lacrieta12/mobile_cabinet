@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
+import uuid
 
 
 app = Flask(__name__)
@@ -94,23 +95,28 @@ def display():
 		return render_template("display.html", account = account)
 	return redirect(url_for('login'))
 
-@app.route("/store", methods =['GET', 'POST'])
-def store():
+@app.route("/search", methods =['GET', 'POST'])
+def search():
 	msg = ''
 	if 'loggedin' in session:
-		if request.method == 'POST' and 'id_transaksi' in request.form and 'id_dokumen' in request.form and 'status_dev1' in request.form and 'status_dev2' in request.form and 'status_dev3' in request.form:
-			id_transaksi = request.form['id_transaksi']
-			id_dokumen = request.form['id_dokumen']
-			status_dev1 = request.form['status_dev1']
-			status_dev2 = request.form['status_dev2']
-			status_dev3 = request.form['status_dev3']
-			cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-			cursor.execute('INSERT INTO data_trans SET id_transaksi =% s, id_dokumen =% s, status_dev1 =% s, status_dev2 =% s, status_dev3 =% s', (id_transaksi, id_dokumen, status_dev1, status_dev2, status_dev3))
-			mysql.connection.commit()
-			msg = 'You have successfully updated !'
-		elif request.method == 'POST':
-			msg = 'Please fill out the form !'
-		return render_template("store.html", msg = msg)
+		if request.method == 'POST' and 'nama_dokumen' in request.form:
+			try:
+				nama_dokumen = request.form['nama_dokumen']
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute('SELECT id_dokumen FROM list_dokumen WHERE nama_dokumen = % s', (nama_dokumen, ))
+				id_dokumen = cursor.fetchone()['id_dokumen']
+				print(id_dokumen)
+				mysql.connection.commit()
+
+				id = uuid.uuid1()
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute('INSERT INTO data_trans SET id_dokumen =% s, id_transaksi =% s', (id_dokumen, id.hex))
+				mysql.connection.commit()
+				msg = 'Wait While we prepare your Document !'
+			except:
+				msg = 'Document you find is note Stored !'
+			
+		return render_template("search.html", msg = msg)
 	return redirect(url_for('login'))
 
 @app.route("/retrieve")
@@ -155,4 +161,5 @@ def update():
 	return redirect(url_for('login'))
 
 if __name__ == "__main__":
-	app.run(host ="localhost", port = int("5000"))
+	# app.run(host ="localhost", port = int("5000"))
+	app.run(host ="0.0.0.0", port = int("5000"))
