@@ -95,39 +95,6 @@ def display():
 		return render_template("display.html", account = account)
 	return redirect(url_for('login'))
 
-@app.route("/search", methods =['GET', 'POST'])
-def search():
-	msg = ''
-	if 'loggedin' in session:
-		if request.method == 'POST' and 'nama_dokumen' in request.form:
-			try:
-				nama_dokumen = request.form['nama_dokumen']
-				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-				cursor.execute('SELECT id_dokumen FROM list_dokumen WHERE nama_dokumen = % s', (nama_dokumen, ))
-				id_dokumen = cursor.fetchone()['id_dokumen']
-				print(id_dokumen)
-				mysql.connection.commit()
-
-				id = uuid.uuid1()
-				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-				cursor.execute('INSERT INTO data_trans SET id_dokumen =% s, id_transaksi =% s', (id_dokumen, id.hex))
-				mysql.connection.commit()
-				msg = 'Wait While we prepare your Document !'
-			except:
-				msg = 'Document you find is note Stored !'
-			
-		return render_template("search.html", msg = msg)
-	return redirect(url_for('login'))
-
-@app.route("/retrieve")
-def retrieve():
-	if 'loggedin' in session:
-		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-		cursor.execute('SELECT * FROM list_dokumen')
-		dokumen = cursor.fetchall()
-		return render_template("retrieve.html", dokumen = dokumen)
-	return redirect(url_for('login'))
-
 @app.route("/update", methods =['GET', 'POST'])
 def update():
 	msg = ''
@@ -159,6 +126,64 @@ def update():
 			msg = 'Please fill out the form !'
 		return render_template("update.html", msg = msg)
 	return redirect(url_for('login'))
+
+@app.route("/search", methods =['GET', 'POST'])
+def search():
+	msg = ''
+	if 'loggedin' in session:
+		if request.method == 'POST' and 'nama_dokumen' in request.form:
+			try:
+				nama_dokumen = request.form['nama_dokumen']
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute('SELECT id_dokumen FROM list_dokumen WHERE nama_dokumen = % s', (nama_dokumen, ))
+				id_dokumen = cursor.fetchone()['id_dokumen']
+				print(id_dokumen)
+				mysql.connection.commit()
+
+				id = uuid.uuid1()
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute('INSERT INTO data_trans SET id_dokumen =% s, id_transaksi =% s', (id_dokumen, id.hex))
+				mysql.connection.commit()
+				msg = 'Wait While we prepare your Document !'
+			except:
+				msg = 'Document you find is note Stored !'
+			
+		return render_template("search.html", msg = msg)
+	return redirect(url_for('login'))
+
+@app.route("/store", methods =['GET', 'POST'])
+def store():
+	msg = ''
+	if 'loggedin' in session:
+		if request.method == 'POST' and 'nama_dokumen' in request.form and 'device_ke' in request.form and 'rak_ke' in request.form and 'baris_ke' in request.form and 'kolom_ke' in request.form:
+			try:
+				nama_dokumen = request.form['nama_dokumen']
+				device_ke = request.form['device_ke']
+				rak_ke = request.form['rak_ke']
+				baris_ke = request.form['baris_ke']
+				kolom_ke = request.form['kolom_ke']
+				
+				
+				id = uuid.uuid1()
+				cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+				cursor.execute('SELECT * FROM list_dokumen WHERE nama_dokumen = % s', (nama_dokumen, ))
+				account = cursor.fetchone()
+				if account:
+					msg = 'Nama Dokumen sudah ada !'
+				elif not re.match(r'[A-Za-z0-9]+', nama_dokumen):
+					msg = 'Nama dokumen hanya boleh terdiri dari huruf and angka !'
+				else:
+					cursor.execute('INSERT INTO list_dokumen VALUES (% s, % s, % s, % s, % s, % s)', (id.hex, nama_dokumen, device_ke, rak_ke, baris_ke, kolom_ke, ))
+					mysql.connection.commit()
+					msg = 'Document data is sucesfully registered !'
+			except:
+				msg = 'Document registration error !'
+
+		elif request.method == 'POST':
+			msg = 'Please fill out the form  !'
+			
+		return render_template("store.html", msg = msg)
+
 
 if __name__ == "__main__":
 	# app.run(host ="localhost", port = int("5000"))
