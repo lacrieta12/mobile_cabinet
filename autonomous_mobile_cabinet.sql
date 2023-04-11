@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4deb2+deb11u1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Mar 17, 2023 at 02:24 PM
--- Server version: 10.5.18-MariaDB-0+deb11u1
--- PHP Version: 7.4.33
+-- Host: 127.0.0.1
+-- Generation Time: Apr 11, 2023 at 05:23 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -200,7 +200,8 @@ INSERT INTO `data_trans` (`id_transaksi`, `id_user`, `id_dokumen`, `status_dev1`
 (129, '1', '621aee93a6', 1, 1, 1, '2023-03-17 14:27:36'),
 (130, '1', '621aee93a7', 1, 1, 1, '2023-03-17 14:28:05'),
 (131, '1', '621aee93a5', 1, 1, 1, '2023-03-17 14:28:27'),
-(132, '1', '621aee93a4', 1, 1, 1, '2023-03-17 14:28:49');
+(132, '1', '621aee93a4', 1, 1, 1, '2023-03-17 14:28:49'),
+(133, '1', '621aee93a4', 0, 0, 0, '2023-04-11 10:16:04');
 
 -- --------------------------------------------------------
 
@@ -220,7 +221,7 @@ CREATE TABLE `door_locks` (
 --
 
 INSERT INTO `door_locks` (`id_loker`, `device_ke`, `rak_ke`, `status_pintu`) VALUES
-(1, 1, 1, 0),
+(1, 1, 1, 1),
 (2, 2, 1, 0),
 (3, 2, 2, 0),
 (4, 3, 1, 0);
@@ -245,11 +246,54 @@ CREATE TABLE `list_dokumen` (
 --
 
 INSERT INTO `list_dokumen` (`id_dokumen`, `nama_dokumen`, `device_ke`, `rak_ke`, `baris_ke`, `kolom_ke`) VALUES
-('621aee93a4', 'Dokumen 1', 1, 1, 2, 3),
-('621aee93a5', 'Dokumen 21', 2, 1, 3, 1),
-('621aee93a6', 'Dokumen 3', 3, 1, 1, 1),
-('621aee93a7', 'Dokumen 22', 2, 2, 3, 1),
-('92f55c2ac', 'Jdkasd', 1, 1, 1, 1);
+('1', 'Dokumen 1', 1, 1, 1, 1),
+('10', 'Dokumen 10', 1, 1, 5, 2),
+('11', 'Dokumen 11', 1, 1, 6, 1),
+('12', 'Dokumen 12', 1, 1, 6, 2),
+('13', 'Dokumen 13', 2, 1, 1, 1),
+('14', 'Dokumen 14', 2, 1, 1, 2),
+('15', 'Dokumen 15', 2, 1, 2, 1),
+('16', 'Dokumen 16', 2, 1, 2, 2),
+('17', 'Dokumen 17', 2, 1, 3, 1),
+('18', 'Dokumen 18', 2, 1, 3, 2),
+('19', 'Dokumen 19', 2, 1, 4, 1),
+('2', 'Dokumen 2', 1, 1, 2, 1),
+('20', 'Dokumen 20', 2, 1, 4, 2),
+('21', 'Dokumen 21', 2, 1, 5, 1),
+('22', 'Dokumen 22', 2, 1, 5, 2),
+('23', 'Dokumen 23', 2, 1, 6, 1),
+('24', 'Dokumen 24', 2, 1, 6, 2),
+('25', 'Dokumen 25', 2, 2, 1, 1),
+('26', 'Dokumen 26', 2, 2, 1, 2),
+('27', 'Dokumen 27', 2, 2, 2, 1),
+('28', 'Dokumen 28', 2, 2, 2, 2),
+('29', 'Dokumen 29', 2, 2, 3, 1),
+('3', 'Dokumen 3', 1, 1, 2, 1),
+('30', 'Dokumen 30', 2, 2, 3, 2),
+('31', 'Dokumen 31', 2, 2, 4, 1),
+('32', 'Dokumen 32', 2, 2, 4, 2),
+('33', 'Dokumen 33', 2, 2, 5, 1),
+('34', 'Dokumen 34', 2, 2, 5, 2),
+('35', 'Dokumen 35', 2, 2, 6, 1),
+('36', 'Dokumen 36', 2, 2, 6, 2),
+('37', 'Dokumen 37', 3, 1, 1, 1),
+('38', 'Dokumen 38', 3, 1, 1, 2),
+('39', 'Dokumen 39', 3, 1, 2, 1),
+('4', 'Dokumen 4', 1, 1, 2, 2),
+('40', 'Dokumen 40', 3, 1, 2, 2),
+('41', 'Dokumen 41', 3, 1, 3, 1),
+('42', 'Dokumen 42', 3, 1, 3, 2),
+('43', 'Dokumen 43', 3, 1, 4, 1),
+('44', 'Dokumen 44', 3, 1, 4, 2),
+('45', 'Dokumen 45', 3, 1, 5, 1),
+('46', 'Dokumen 46', 3, 1, 5, 2),
+('47', 'Dokumen 47', 3, 1, 6, 1),
+('48', 'Dokumen 48', 3, 1, 6, 2),
+('5', 'Dokumen 5', 1, 1, 3, 1),
+('6', 'Dokumen 1', 1, 1, 3, 1),
+('7', 'Dokumen 7', 1, 1, 4, 1),
+('8', 'Dokumen 8', 1, 1, 4, 2),
+('9', 'Dokumen 9', 1, 1, 5, 1);
 
 --
 -- Indexes for dumped tables
@@ -293,7 +337,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `data_trans`
 --
 ALTER TABLE `data_trans`
-  MODIFY `id_transaksi` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id_transaksi` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `door_locks`
