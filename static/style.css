@@ -143,3 +143,15 @@
 	font-style: oblique;
 	font-weight: bold;
 }
+.table1 {
+    font-family: sans-serif;
+    color: #232323;
+    border-collapse: collapse;
+}
+.tabel1, th , td{
+	border: 1px solid #141313;
+    padding: 8px 20px;
+	/* color: #2222ff;
+	font-style: oblique;
+	font-weight: bold; */
+}

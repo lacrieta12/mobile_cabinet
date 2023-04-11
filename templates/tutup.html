@@ -1,0 +1,77 @@
+<!--Store this code in 'display.html' file inside the 'templates' folder-->
+
+<html lang="en">
+
+<head>
+	<title>display</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body bgcolor="#ffffff">
+	<div class="one">
+		<div class="two">
+			<h1>Side Bar</h1>
+			<ul>
+				<li><a href="{{url_for('index')}}">Index</a></li>
+				<li class="active"><a href="{{url_for('display')}}">Display</a></li>
+				<li><a href="{{url_for('update')}}">Update</a></li>
+				<li><a href="{{url_for('search')}}">Search</a></li>
+				<li><a href="{{url_for('store')}}">Store</a></li>
+				<li><a href="{{url_for('logout')}}">Log out</a></li>
+			</ul>
+		</div>
+		<div class="content" align="center">
+			<div class="topbar">
+				<h2>Welcome!! Autonomous Mobile Cabinet User</h2>
+			</div> </br>
+			<br class="contentbar">
+			<h2><b>Data Dokumen yang Anda Cari</b></h2> </br>
+			{% block content %}
+			<div class="border">
+				<table class="tabel1"></br>
+					<tr>
+						<th>Nama_dokumen</th>
+						<th>: </th>
+						<td>
+							<b>
+								{{ list_dokumen['nama_dokumen'] }}
+							</b>
+						</td>
+					</tr>
+					<tr>
+						<th>Device_ke</th>
+						<th>: </th>
+						<td>{{ list_dokumen['device_ke'] }}</td>
+					</tr>
+					<tr>
+						<th>Rak_ke</th>
+						<th>: </th>
+						<td>{{ list_dokumen['rak_ke'] }}</td>
+					</tr>
+					<tr>
+						<th>Baris_ke</th>
+						<th>: </th>
+						<td>{{ list_dokumen['baris_ke'] }}</td>
+					</tr>
+					<tr>
+						<th>Kolom_ke</th>
+						<th>: </th>
+						<td>{{ list_dokumen['kolom_ke'] }}</td>
+					</tr>
+				</table>
+			</div>
+			{% endblock %}
+			<br>
+			<br>
+			<form action="{{ url_for('tutup') }}" method="post" autocomplete="off">
+				<div class="msg"><b>{{ msg}}</b></div>
+				<br>
+				<div class="row">
+					<input type="submit" class="btn" value="Tutup">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

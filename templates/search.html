@@ -1,36 +1,40 @@
 <!--Store this code in 'search.html' file inside the 'templates' folder-->
 <html lang="en">
-	<head>
-		<title>search</title>
-		<link rel="stylesheet" href="../static/style.css">
-	</head>
-	<body bgcolor="#ffffff">
-		<div class="one">
-			<div class="two">
-				<h1>Side Bar</h1>
-				<ul>
-					<li><a href="{{url_for('index')}}">Index</a></li>
-					<li><a href="{{url_for('display')}}">Display</a></li>
-					<li><a href="{{url_for('update')}}">Update</a></li>
-					<li class="active"><a href="{{url_for('search')}}">Search</a></li>
-					<li><a href="{{url_for('store')}}">Store</a></li>
-					<li><a href="{{url_for('logout')}}">Log out</a></li>
-				</ul>
-			</div>
-			<div class="content" align="center">
-				<div class="topbar">
-					<h2>Welcome!! You can search your document!! </h2>					
-				</div></br></br>
-				<div class="contentbar">
-				<h1>Fill Documents Name to Find it from the Cabinet</h1></br>
-			<form action="{{ url_for('search') }}" method="post" autocomplete="off">
-					<div class="msg">{{ msg }}</div>
-					<input type="text" name="nama_dokumen" placeholder="Enter Your Document Name" class="textbox" id="nama_dokumen"required></br></br>
-					<input type="submit" class="btn" value="Search">
-			</form>					
-				</div>
-				
-			</div>
+
+<head>
+	<title>search</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body bgcolor="#ffffff">
+	<div class="one">
+		<div class="two">
+			<h1>Side Bar</h1>
+			<ul>
+				<li><a href="{{url_for('index')}}">Index</a></li>
+				<li><a href="{{url_for('display')}}">Display</a></li>
+				<li><a href="{{url_for('update')}}">Update</a></li>
+				<li class="active"><a href="{{url_for('search')}}">Search</a></li>
+				<li><a href="{{url_for('store')}}">Store</a></li>
+				<li><a href="{{url_for('logout')}}">Log out</a></li>
+			</ul>
 		</div>
-	</body>
+		<div class="content" align="center">
+			<div class="topbar">
+				<h2>Welcome!! You can search your document!! </h2>
+			</div></br></br>
+			<div class="contentbar">
+				<h1>Fill Documents Name to Find it from the Cabinet</h1></br>
+				<form action="{{ url_for('search') }}" method="post" autocomplete="off">
+					<div class="msg">{{ msg }}</div>
+					<input type="text" name="nama_dokumen" placeholder="Enter Your Document Name" class="textbox"
+						id="nama_dokumen" required></br></br>
+					<input type="submit" class="btn" value="Search">
+				</form>
+			</div>
+
+		</div>
+	</div>
+</body>
+
 </html>
