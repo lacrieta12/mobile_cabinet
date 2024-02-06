@@ -1,40 +1,189 @@
-<!--Store this code in 'store.html' file inside the 'templates' folder-->
-<html lang="en">
-	<head>
-		<title>store</title>
-		<link rel="stylesheet" href="../static/style.css">
-	</head>
-	<body bgcolor="#ffffff">
-		<div class="one">
-			<div class="two">
-				<h1>Side Bar</h1>
-				<ul>
-					<li><a href="{{url_for('index')}}">Index</a></li>
-					<li><a href="{{url_for('display')}}">Display</a></li>
-					<li><a href="{{url_for('update')}}">Update</a></li>
-					<li><a href="{{url_for('search')}}">Search</a></li>
-					<li class="active"><a href="{{url_for('store')}}">Store</a></li>
-					<li><a href="{{url_for('logout')}}">Log out</a></li>
-				</ul>
-			</div>
-			<div class="content" align="center">
-				<div class="topbar">
-					<h2>Welcome!! You can store your document!! </h2>					
-				</div></br></br>
-				<div class="contentbar">
-				<h1>Fill Documents Data to Store it to the Cabinet</h1></br>
-				<form action="{{ url_for('store') }}" method="post" autocomplete="off">
-					<div class="msg" style="color: red;">{{ msg }}</div>
-					<br>
-					<input type="text" name="nama_dokumen" placeholder="Enter Your Document Name" class="textbox" id="nama_dokumen"required></br></br>
-					<input type="number" name="device_ke" placeholder="Enter Device Number" class="textbox" id="device_ke"required></br></br>
-					<input type="number" name="rak_ke" placeholder="Enter Cabinet Number" class="textbox" id="rak_ke"required></br></br>
-					<input type="number" name="baris_ke" placeholder="Enter Row Number" class="textbox" id="baris_ke"required></br></br>
-					<input type="number" name="kolom_ke" placeholder="Enter Coloumn Number" class="textbox" id="kolom_ke"required></br></br>
-					<input type="submit" class="btn" value="Store">
-				</form>					
-				</div>
-			</div>
-		</div>
-	</body>
+{% include 'header.html' %}
+{% include 'style.html' %}
+<!-- script untuk form-->
+
+<!--===============================================================================================-->	
+<script src="{{url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{url_for('static', filename='vendor2/bootstrap/js/popper.js')}}"></script>
+<script src="{{url_for('static', filename='vendor2/bootstrap/js/bootstrap.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{url_for('static', filename='vendor2/select2/select2.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{url_for('static', filename='vendor2/tilt/tilt.jquery.min.js')}}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+
+
+
+
+
+
+
+<!-- script untuk form-->
+</head>
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+            margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+  }
+  </style>
+    <body id="page-top">
+      <!-- Page Wrapper -->
+      <div id="wrapper">
+      
+
+        <!-- include sidebar-->
+        {% include 'sidebar.html' %}
+
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+          <!-- Main Content -->
+          <div id="content">
+            {% include 'topbar.html' %}
+
+            <!-- Begin Page Content -->
+
+            <div class="text-center">
+              {% if msg_search|length != 0: %}
+                    {% if msg_type == 0: %}
+                    
+                    <div class="alert alert-danger ">
+                        <a class="close font-weight-light" data-dismiss="alert" href="#">×</a>{{msg_search}}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success ">
+                      <a class="close font-weight-light" data-dismiss="alert" href="#">×</a>{{msg_search}}
+                  </div>
+                    {% endif %}
+                
+              {% endif %}
+            </div>
+
+
+
+          <div class="d-flex justify-content-center bg-light"></br>
+            
+            <div class="container">
+            
+              <div class="row justify-content-center">
+              
+                  <div class="row justify-content-center">
+                    <div class="col-sm-12">
+                      <div class="card mb-5 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+
+                        <!-- FORM-->
+                              <form class="login100-form validate-form" action="{{ url_for('store')}}" method="post">
+                                <span class="login100-form-title">
+                                  Input Dokumen
+                                </span>
+
+                                <div class="wrap-input100">
+                                  {% if session.nm_dokumen|length == 0: %}
+                                  
+                                  <input type="text" name="nama_dokumen" id="nama_dokumen" class="input100" 
+                                        placeholder="Nama Dokumen" required >
+                                        <span class="focus-input100"></span>
+                                  <span class="symbol-input100">
+                                    <i class="fa fa-book fa-fw" aria-hidden="true"></i>
+                                  </span>
+                                  {% else %}
+                                  <input type="text" name="nama_dokumen" id="nama_dokumen" value="{{session.nm_dokumen}}" class="input100" 
+                                        placeholder="Nama Dokumen" required >
+                                        <span class="focus-input100"></span>
+                                  <span class="symbol-input100">
+                                    <i class="fa fa-book fa-fw" aria-hidden="true"></i>
+                                  </span>
+                                
+                                  {% endif %}
+                                </div>
+                      
+                                <div class="wrap-input100 validate-input">
+                                  <input type="number" name="device_ke" id="device_ke" class="input100" 
+                                  placeholder="Nomor Kabinet" onkeypress="return hanyaAngka(event)" min="1" max="3" required>
+                                  <span class="focus-input100"></span>
+                                  <span class="symbol-input100">
+                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                  </span>
+                                </div>
+                                <div class="wrap-input100 validate-input">
+                                  <input type="number" name="rak_ke" id="rak_ke" class="input100" 
+                                  placeholder="Nomor rak" onkeypress="return hanyaAngka(event)" min="1" max="2" required>
+                                  <span class="focus-input100"></span>
+                                  <span class="symbol-input100">
+                                    <i class="fa fa-braille" aria-hidden="true"></i>
+                                  </span>
+                                </div>
+
+                                <div class="wrap-input100 validate-input">
+                                  <input type="number" name="baris_ke" id="baris_ke" class="input100" 
+                                  placeholder="Nomor Baris" onkeypress="return hanyaAngka(event)" min="1" max="2" required>
+                                  <span class="focus-input100"></span>
+                                  <span class="symbol-input100">
+                                    <i class="fa fa-th" aria-hidden="true"></i>
+                                  </span>
+                                </div>
+
+                                <div class="wrap-input100 validate-input">
+                                  <input type="number" name="kolom_ke" id="kolom_ke" class="input100" 
+                                  placeholder="Nomor Kolom" onkeypress="return hanyaAngka(event)" min="1" max="5" required>
+                                  <span class="focus-input100"></span>
+                                  <span class="symbol-input100">
+                                    <i class="fa fa-columns" aria-hidden="true"></i>
+                                  </span>
+                                </div>
+
+                                
+                      
+                              
+                                
+                                <div class="container-login100-form-btn">
+                                  <button class="login100-form-btn" type="submit">
+                                    Simpan
+                                  </button>
+                                </div>
+                      
+                              
+                      
+                                
+                              </form>
+                        <!--END FORM-->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              
+              
+              </div>
+
+            </div>
+
+          </div>
+
+            <!-- /.container-fluid -->
+          </div>
+          <!-- End of Main Content -->
+
+
+        
+          {% include 'footer.html' %}
+
+          {% include 'script.html' %}
+
+
+</body>
 </html>

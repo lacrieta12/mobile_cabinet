@@ -1,0 +1,110 @@
+{% include 'header.html' %}
+{% include 'style.html' %}
+</head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+
+      <!-- include sidebar-->
+      {% include 'sidebar.html' %}
+
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          {% include 'topbar.html' %}
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="d-flex justify-content-center">
+
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="text-xs font-weight-bold text-info text-uppercase mb-1 text-center">
+                  Perbaharui Data Pengguna
+                </div>
+                <hr>
+                  <div class="row no-gutters align-items-center">
+                   
+                   
+                    <div class="col-auto">
+                      <form class="user" action="{{ url_for('update')}}" method="post">
+
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="text" name="username" id="username" class="form-control form-control-user"
+                                    placeholder="Username">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="organisation" id="organisation" class="form-control form-control-user"
+                                    placeholder="Organisation">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="text" name="address" id="address" class="form-control form-control-user" 
+                                placeholder="Address">
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="text" name="city" id="city" class="form-control form-control-user" 
+                                    placeholder="City">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="state" id="state" class="form-control form-control-user"
+                                    placeholder="State">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="text" name="country" id="country" class="form-control form-control-user"
+                                    placeholder="Country">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="postalcode" id="postalcode" class="form-control form-control-user"
+                                    placeholder="postalcode" inputmode="numeric">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control form-control-user"
+                                placeholder="Email Address">
+                        </div>       
+                        <div class="form-group">
+                          <input type="password" name="password" id="password" class="form-control form-control-user"
+                          placeholder="Password">
+                      </div>                           
+
+                                          
+                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Update">
+                        
+                        <hr>
+                       
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>        
+
+            
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        {% include 'footer.html' %}
+
+        {% include 'script.html' %}
+
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+{% include 'header.html' %}
+{% include 'style.html' %}
+</head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+
+      <!-- include sidebar-->
+      {% include 'sidebar.html' %}
+
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          {% include 'topbar.html' %}
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid ">
+            
+          <div class="text-center">
+            {% if msg_search|length != 0: %}
+                  {% if msg_type == 0: %}
+                  
+                  <div class="alert alert-danger ">
+                      <a class="close font-weight-light" data-dismiss="alert" href="#">×</a>{{msg_search}}
+                  </div>
+                  {% else %}
+                  <div class="alert alert-success ">
+                    <a class="close font-weight-light" data-dismiss="alert" href="#">×</a>{{msg_search}}
+                </div>
+                  {% endif %}
+               
+            {% endif %}
+          </div>
+            
+            <!-- Page Heading -->
+            <div class="d-flex justify-content-center bg-light"></br>
+             
+              <div class="card ">
+                <div class="card-body-main border-left-info shadow h-100 py-2">
+                  <div class="text-xs font-weight-bold text-info text-uppercase mb-1 text-center">
+                  STORE
+                </div>
+               
+                
+                <hr>
+                  <div class="row no-gutters align-items-center">
+                   
+                   
+                    <div class="col-auto">
+                      <form class="user" action="{{ url_for('store')}}" method="post">
+                        <div class="col-xm-12">
+
+
+                          <div class="form-group">
+                            {% if session.nm_dokumen|length == 0: %}
+                            
+                            <input type="text" name="nama_dokumen" id="nama_dokumen" class="form-control form-control-user" 
+                                  placeholder="Enter Your Document Name" required >
+                            {% else %}
+                            <input type="text" name="nama_dokumen" id="nama_dokumen" value="{{session.nm_dokumen}}" class="form-control form-control-user" 
+                                  placeholder="Enter Your Document Name" required >
+                           
+                            {% endif %}
+                           </div>
+                      
+  
+                          <div class="form-group">
+                           
+                              <input type="text" name="device_ke" id="device_ke" class="form-control form-control-user" 
+                               placeholder="Enter Device Number" onkeypress="return hanyaAngka(event)" required>
+                          </div>
+                          
+                          <div class="form-group">
+                              <input type="text" name="rak_ke" id="rak_ke" class="form-control form-control-user" 
+                              placeholder="Enter Cabinet Number" onkeypress="return hanyaAngka(event)"required>
+                          </div>
+                          
+                          <div class="form-group">
+                              <input type="text" name="baris_ke" id="baris_ke" class="form-control form-control-user" 
+                              placeholder="Enter Row Number" onkeypress="return hanyaAngka(event)" required>
+                          </div>
+  
+                          <div class="form-group">
+                              <input type="text" name="kolom_ke" id="kolom_ke" class="form-control form-control-user" 
+                              placeholder="Enter Coloumn Number" onkeypress="return hanyaAngka(event)" required>
+                          </div>
+
+                          
+
+                        </div>
+                       
+                          <hr>
+                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Store">
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>        
+
+            
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        {% include 'footer.html' %}
+
+        {% include 'script.html' %}
+
+      </body>
+      </html>

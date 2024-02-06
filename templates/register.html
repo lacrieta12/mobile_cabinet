@@ -1,37 +1,225 @@
-<!--Store this code in 'register.html' file inside the 'templates' folder-->
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title> register </title>
-		<link rel="stylesheet" href="../static/style.css">	
-	</head>
-	<body>
-		<div class="registercontent" align="center">
-			<div class="registertop">
-				<h1>Register</h1>
-			</div></br></br>
-			<div class="registerbottom">
-			<form action="{{ url_for('register')}}" method="post" autocomplete="off">
-			<div class="msg">{{ msg }}</div>
-			<input type="text" name="username" placeholder="Enter Your Username" class="textbox" id="username" required></br></br>
-			<input type="password" name="password" placeholder="Enter Your Password" class="textbox" id="password" required></br></br>
-			<input type="email" name="email" placeholder="Enter Your Email ID" class="textbox" id="email" required></br></br>
-			<input type="text" name="organisation" placeholder="Enter Your Organisation" class="textbox" id="organisation" required></br></br>
-			<input type="text" name="address" placeholder="Enter Your Address" class="textbox" id="address" required></br></br>
-			<input type="text" name="city" placeholder="Enter Your City" class="textbox" id="city" required></br></br>
-			<input type="text" name="state" placeholder="Enter Your State" class="textbox" id="state" required></br></br>
-			<input type="text" name="country" placeholder="Enter Your Country" class="textbox" id="country" required></br></br>
-			<input type="text" name="postalcode" placeholder="Enter Your Postal Code" class="textbox" id="postalcode" required></br></br>
-			<input style="text-align: center;" type="password" name="PIN" placeholder="******"
-						class="textbox" id="PIN" inputmode="numeric"
-						oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-						maxlength="6" required>	</br></br>
+{% include 'header.html' %}
+{% include 'style.html' %}
+<!-- script untuk form-->
 
-			<input type="submit" class="btn" value="Register">
+<!--===============================================================================================-->	
+<script src="{{url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{url_for('static', filename='vendor2/bootstrap/js/popper.js')}}"></script>
+<script src="{{url_for('static', filename='vendor2/bootstrap/js/bootstrap.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{url_for('static', filename='vendor2/select2/select2.min.js')}}"></script>
+<!--===============================================================================================-->
+<script src="{{url_for('static', filename='vendor2/tilt/tilt.jquery.min.js')}}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
 
-			</form>
-			<p class="worddark">Already have account? <a class="worddark" href="{{ url_for('login')}}"> Login here</a></p>
-			</div>
-		</div>
-	</body>
+
+
+
+
+
+
+
+<!-- script untuk form-->
+</head>
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+    
+
+      <!-- include sidebar-->
+      {% include 'sidebar.html' %}
+
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          {% include 'topbar.html' %}
+
+          <!-- Begin Page Content -->
+
+          <div class="text-center">
+            {% if msg|length != 0: %}
+                  {% if msg_type == 0: %}
+                  
+                  <div class="alert alert-danger ">
+                      <a class="close font-weight-light" data-dismiss="alert" href="#">×</a>{{msg}}
+                  </div>
+                  {% else %}
+                  <div class="alert alert-success ">
+                    <a class="close font-weight-light" data-dismiss="alert" href="#">×</a>{{msg}}
+                </div>
+                  {% endif %}
+               
+            {% endif %}
+          </div>
+
+
+
+        <div class="d-flex justify-content-center bg-light m-2"></br>
+          
+          <div class="container">
+          
+            <div class="row justify-content-center">
+            
+                <div class="row justify-content-center">
+                  <div class="col-sm-12">
+                    <div class="card mb-5 mt-5 shadow-lg p-3 mb-5 bg-white rounded">
+                      <div class="card-body">
+
+                      <!-- FORM-->
+                            <form class="login100-form validate-form" action="{{ url_for('register')}}" method="post">
+                              <span class="login100-form-title">
+                                Input Data Pengguna
+                              </span>
+
+                              <div class="text-center">
+                                {% for message in get_flashed_messages(with_categories=true) %} 
+
+                                 <div class="flash" style="color:orange;">{{ message }}</div>
+                                </br> 
+
+                                {% endfor %} 
+                                </div>
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="text" name="user" id="user" class="input100" 
+                                placeholder="Username" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="email" name="email" id="email" class="input100" 
+                                placeholder="E-mail" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="password" name="pass" id="pass" class="input100" 
+                                placeholder="Password" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-lock" aria-hidden="true"></i>
+                                </span>
+                              </div>
+                    
+                              <div class="wrap-input100 validate-input">
+                                <input type="text" name="organisation" id="organisation" class="input100" 
+                                placeholder="Organisasi" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-university" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="text" name="address" id="address" class="input100" 
+                                placeholder="Alamat" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-address-card" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="text" name="city" id="city" class="input100" 
+                                placeholder="Kota" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-building-o" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="text" name="state" id="state" class="input100" 
+                                placeholder="Provinsi" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-building" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="text" name="country" id="country" class="input100" 
+                                placeholder="Negara" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-building" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="text" name="postalcode" id="postalcode" class="input100" 
+                                placeholder="Kodepos" onkeypress="return hanyaAngka(event)" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-columns" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+
+                              <div class="wrap-input100 validate-input">
+                                <input type="password" name="pin" id="pin" class="input100" 
+                                placeholder="PIN" onkeypress="return hanyaAngka(event)"  maxlength="6" required>
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                  <i class="fa fa-key" aria-hidden="true"></i>
+                                </span>
+                              </div>
+
+                              
+
+                              
+                    
+                             
+                              
+                              <div class="container-login100-form-btn">
+                                <button class="login100-form-btn" type="submit">
+                                  Simpan
+                                </button>
+                              </div>
+                    
+                             
+                    
+                              
+                            </form>
+                      <!--END FORM-->
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+             
+             
+            </div>
+
+          </div>
+
+        </div>
+
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+
+      
+        {% include 'footer.html' %}
+
+        {% include 'script.html' %}
+
+
+</body>
 </html>

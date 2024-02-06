@@ -1,0 +1,116 @@
+{% include 'header.html' %}
+{% include 'style.html' %}
+</head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          {% include 'topbar.html' %}
+
+          <!-- Begin Page Content -->
+         
+            <div class="d-flex justify-content-center">
+              <div class="container-fluid">
+                <div class="container-fluid bg-light mb-3">
+
+                  <div class="container justify-content-center">
+                    <div class="row">
+
+                      <div class="col-lg-12">
+                        <div class="d-flex justify-content-center">
+                          
+                           <!-- Section: Design Block 
+                          <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" alt="Trendy Pants and Shoes"
+                          -->
+                         
+                              <div class="card m-5 shadow-lg p-3 mb-5 bg-white rounded">
+                                <div class="row g-0 d-flex align-items-center">
+                                  <div class="col-lg-4 d-none d-lg-flex">
+                                   
+                                      <img src="{{url_for('static', filename='css/cabinet.png')}}" alt="Italian Trulli" width="450" height="300">
+                                  </div>
+                                  <div class="col-lg-8">
+                                    <div class="card-body py-5 px-md-5">
+
+                                      <h1 style="color: #663399">Nama Produk</h1>
+                                     
+                                      <p style="color: hsl(217, 10%, 50.8%)">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Eveniet, itaque accusantium odio, soluta, corrupti aliquam
+                                        quibusdam tempora at cupiditate quis eum maiores libero
+                                        veritatis? Dicta facilis sint aliquid ipsum atque?
+                                      </p>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </section>
+                            <!-- Section: Design Block -->
+
+                        </div>
+                      </div>
+                     
+                    </div>
+                  </div>
+
+
+
+                  <div class="container justify-content-center">
+                    <div class="row">
+                      <div class="col-lg-12 mb-5 mt-6">
+                        <div class="d-flex justify-content-center">
+
+                          <div style="text-align: center;">
+                            <a href="{{ url_for('index') }}" class="btn btn-sq-lg btn-primary mr-4">
+                              <i class="fa fa-folder-open fa-5x"></i>
+                              <h4 style="margin-top: 0.25em;">Cabinet</h4>
+                            </a>
+                          </div>
+               
+
+                          
+                          <div style="text-align: center;" class"mr-4">
+                            <a href="{{ url_for('display') }}" class="btn btn-sq-lg btn-primary">
+                              <i class="fa fa-user fa-5x"></i>
+                              <h4 style="margin-top: 0.25em;">Account</h4>
+                            </a>
+                          </div>
+                         
+
+                        </div>
+                       
+                      </div>
+
+                    </div>
+                  </div>
+
+
+
+                </div>
+              </div>
+                <!-- Page Heading -->
+          </div>        
+
+        
+
+
+              
+
+            
+
+        </div>
+      </div>
+    </div>
+      
+      {% include 'footer.html' %}
+
+      {% include 'script.html' %}
+
+
+  </body>
+</html>
